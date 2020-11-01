@@ -1,0 +1,14 @@
+{% extends "auctions/layout.html" %}
+
+
+
+
+{% block body %}
+<h2>error</h2>
+<div class="alert alert-danger">something went wrong !!</div>
+<div class="alert alert-danger">error type : {{message}}</div>
+<div><a href="{% url 'index' %}">click to go to active listings</a></div>
+
+
+
+{% endblock %}

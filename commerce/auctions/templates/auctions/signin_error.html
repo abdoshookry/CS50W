@@ -1,0 +1,13 @@
+{% extends "auctions/layout.html" %}
+
+
+
+
+{% block body %}
+<h2>error</h2>
+<div class="alert alert-danger">you must sign in to do this action</div>
+<div><a href="{% url 'login' %}"> click to go to login page</a></div>
+
+
+
+{% endblock %}

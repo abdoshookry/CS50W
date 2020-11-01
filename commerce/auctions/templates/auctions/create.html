@@ -1,0 +1,42 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+{% if user.is_authenticated %}
+<div class="border">
+    <div class="create">
+
+        <h2>create a Listing</h2>
+        <br>
+
+        <form action="{% url 'save listing' %}" method="POST">
+            {% csrf_token %}
+
+            <div>enter the title : <div class="form"> {{form.name}}</div>
+            </div>
+            <br>
+            <div>enter the descreption : <div class="form">{{form.descreption}}</div>
+            </div>
+            <br>
+            <div>enter the starting bid : <div class="form">{{form.bid}}</div>
+            </div>
+            <br>
+            <div>enter the image url : <div class="form">{{form.image}}</div>
+            </div>
+            <br>
+            <div>enter the category : <div class="form"> {{form.category}}</div>
+            </div>
+            <br>
+            <input type="submit">
+        </form>
+    </div>
+</div>
+
+{% else %}
+<h2>create a Listing</h2>
+<br>
+<div>you must sign in to create a listing</div>
+{% endif %}
+
+
+
+{% endblock %}

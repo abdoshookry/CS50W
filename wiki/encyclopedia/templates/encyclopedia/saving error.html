@@ -1,0 +1,22 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+Encyclopedia
+{% endblock %}
+
+{% block body %}
+
+<h1>Error</h1>
+
+<div>
+     page {{title}} already exists try again
+</div>
+<div>
+    <a href="javascript:history.back()">Go Back</a>
+</div>
+
+<div>
+    <a href="{% url 'edit' title %}">edit this page</a>
+</div>
+
+{% endblock %}

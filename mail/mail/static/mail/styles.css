@@ -1,0 +1,45 @@
+textarea {
+    min-height: 400px;
+}
+
+.read{
+    border: 1px solid  #eee;
+    background-color: gray;
+    height: 40px;
+    width: 900px;
+    margin-right: 5px;
+} 
+.emails{
+    border: 1px solid  #eee;
+    background-color: white;
+    height: 40px;
+    width: 900px;
+    float: left;
+    margin-right: 5px;
+}
+
+.btn-link{
+    vertical-align: top;
+    margin-right: 5px;
+}
+
+
+.subject{
+    font-weight: 500;
+    display:inline-block;   
+    text-align: left;
+    width: 400px;
+}
+
+.timestamp{
+    width:100%;
+    font-weight: 100;
+    text-align: right;
+}
+
+.content{
+    overflow-wrap:break-word;
+    border: 1px solid #eee;
+    min-height: 300px;
+    max-width: 900px;
+}

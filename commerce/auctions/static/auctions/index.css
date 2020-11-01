@@ -1,0 +1,46 @@
+.index_img{
+    width: 200px;
+    height: 200px;
+    vertical-align:middle;
+    margin:0px 50px;
+    float: left;
+}
+
+.listing_img{
+    width: 500px;
+    height: 500px;
+}
+
+.info{
+    font-weight: bold;
+    font-size: 20px; 
+   
+}
+
+.border{
+background-color: #eee;
+}
+
+.list{
+    border: 1px solid #eee;
+    text-align: center;
+    width: 1000px;
+    margin :auto;
+    background-color: white;
+}
+
+.create{
+    padding-left:10px ;
+    border: 1px solid #eee;
+    width: 1000px;
+    margin :auto;
+    background-color: white;
+}
+
+.form{
+    margin-left: 50px ;
+}
+
+.comments{
+    text-align: left;
+}

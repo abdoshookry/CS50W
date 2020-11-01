@@ -1,0 +1,16 @@
+{% extends "auctions/layout.html" %}
+
+
+
+
+{% block body %}
+{% if message == "bid completed successfully" %}
+<h2  class="alert alert-success">{{message}}</h2>
+{% else %}
+<h2  class="alert alert-danger">{{message}}</h2>
+{% endif %}
+<a href="{% url 'listing' id %}">return to the listing</a>
+
+
+
+{% endblock %}

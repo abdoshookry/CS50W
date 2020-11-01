@@ -1,0 +1,102 @@
+
+.body{
+    margin-left: 50px;
+}
+
+ textarea{
+    white-space: pre-wrap ;
+    height: 100px !important;
+}
+form {
+    background-color: #1c1e21;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    padding-left: 25px;    
+    padding-top: 10px ;
+    margin-top: 20px;
+    width: 90%;
+}
+.form-control{
+    background-color: #1c1e21;
+    color: white !important;
+}
+
+.form-control:focus  
+{background-color:#1c1e21 !important}
+
+.content{
+    white-space: pre-wrap;
+    overflow-wrap:break-word;
+
+}
+
+body{
+    background-color: rgb(15, 15, 15);
+    color: #fff;
+    font-family: sans-serif;
+}
+
+.button{
+    border-radius: 10px;
+    width: 100px;
+    height: 35px;
+}
+.button:hover{
+    background-color: white;
+}
+
+.posts{
+    background-color: #1c1e21;
+    border-radius: 10px;
+    margin-bottom: 15px;
+    padding-left: 25px;    
+    padding-top: 10px ;
+    width: 90%;
+
+}
+
+#profile{
+    text-align: center;
+    margin: 0 auto;
+    background-color: #1c1e21;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    width: 90%;
+
+}
+
+.flexcontainer {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto; 
+}
+.flexcontainer .flex-item {
+    flex-direction: column;
+    justify-content: center; 
+    margin: 0 auto;
+}
+
+.page-link{
+    background-color: rgb(15, 15, 15); ;
+    border: none;
+    
+    color: white !important;
+}
+.page-link:hover:not(span){
+    color: grey  !important;
+    background-color: rgb(15, 15, 15); 
+
+}
+span{
+    height: 35px;
+    width: 30px;
+    background-color: #1c1e21 !important ;
+
+    -moz-border-radius: 30px !important;
+    border-radius: 30px !important; 
+
+}
+

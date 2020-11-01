@@ -1,0 +1,124 @@
+{% extends "auctions/layout.html" %}
+
+
+
+
+{% block body %}
+<div class="border">
+    <div class="list">
+
+        <h2>{{listing.name}}</h2>
+
+
+
+        <div>
+            <img src="{{listing.image}}" alt="image doesn't exists" class="listing_img">
+        </div>
+
+        <hr>
+
+        <div class="info"> price: {{listing.bid.price}} </div>
+
+        <div class="badge badge-info"> category: {{listing.category}} </div>
+
+        <div> the author : {{listing.author}} </div>
+        <div>highest bid : {{listing.bid.highestBid}}</div>
+
+        {% if user.is_authenticated %}
+
+        {% if listing.watchlists.is_watching and listing.watchlists.user == user.username %}
+        <br>
+        <div><a href="{% url 'remove from watchlist' listing.id %}" class="btn btn-primary">remove from watchlist</a>
+        </div>
+
+        {% else %}
+        <br>
+        <div><a href="{% url 'add to watchlist' listing.id %}" class="btn btn-primary">add to watchlist</a></div>
+        {% endif %}
+
+        {% endif %}
+
+        {% if author %}
+        {% if not listing.closed %}
+        <br>
+
+        <div><a href="{% url 'close' listing.id %}" class="btn btn-primary"> click to close </a> </div>
+        {% endif %}
+        {% endif %}
+
+
+        <hr>
+
+        <div class="info"> descreption:</div>
+
+        <br>
+
+        <div>{{listing.descreption}} </div>
+
+        <hr>
+
+        {% if not listing.closed %}
+
+        {% if user.is_authenticated %}
+
+        <form action="{% url 'bid' listing.id %}" method="POST">
+            {% csrf_token %}
+            <input name="bid" type="number" placeholder="bid here" required=true>
+            <input type="submit">
+        </form>
+
+        {% else %}
+        <div>sign in to bid and to add comments</div>
+        {% endif %}
+        <hr>
+
+
+
+
+        {% if user.is_authenticated %}
+        <form action="{% url 'comment' listing.id %}" method="POST">
+            {% csrf_token %}
+            <textarea name="comment" id="" cols="30" rows="10" required=true placeholder="enter a comment"></textarea>
+            <input type="submit">
+        </form>
+        {% endif %}
+
+
+
+
+        {% else %}
+
+        <div>this listing is closed</div>
+
+        {% if listing.bid.highestBid == user.username %}
+
+        <h3>congratulations you are the winner</h3>
+
+        {% endif %}
+
+        {% endif %}
+
+        <hr>
+        <div>comments : </div>
+
+        <hr>
+
+        {% for comment in comments %}
+        <div class="comments">
+            <div>{{comment.commenter}} :</div>
+            <br>
+            <div>{{comment.text}}</div>
+        </div>
+        <hr>
+        {% empty %}
+
+        <div>no comments</div>
+
+
+        {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock %}

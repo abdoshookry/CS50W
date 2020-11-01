@@ -1,0 +1,87 @@
+{% extends "network/layout.html" %}
+
+{% block body %}
+
+<div id="posts">
+  {% if user.is_authenticated %}
+  <form action="{% url 'post' %}" id="post">
+    {% csrf_token %}
+    <textarea class="form-control" required=true name="content" placeholder="add new post"></textarea>
+    <br>
+    <input class="button" type="submit" value="Post">
+  </form>
+  {% endif %}
+
+  <h1>{{title}}</h1>
+
+  <div>{{posts.paginator.num_pages }} Pages</div>
+  <div>{{no_posts}} Post</div>
+  <hr>
+
+    {% for post in posts %}
+    <div class=" posts">
+      <div> <a href="{% url 'profile' post.user.id %}">{{post.user.username}} </a> </div>
+
+      {% if user == post.user %}
+      <form id="for{{post.id}}" style="display: none;">
+        {% csrf_token %}
+        <textarea class="form-control" id="con{{post.id}}">{{post.content}}</textarea>
+        <input class="button" type="submit" value="save edit">
+      </form>
+      {% endif %}
+
+      <div class="content" id={{post.id}}>{{post.content}}</div>
+
+      <div class="text-muted"> {{post.timestamp}} </div>
+      <div id="like{{post.id}}">{{post.no_likes}} like</div>
+
+      {% if user.is_authenticated %}
+      <button id="un/like{{post.id}}" type="button" class="btn btn-link" onclick="like('{{post.id}}', '{{user}}')"><i
+          class="far fa-heart"></i></button>
+      {% endif %}
+
+      {% if user == post.user %}
+      <button type="button" class="btn btn-link" onClick="edit('{{post.id}}')"> Edit </button>
+      {% endif %}
+      <hr>
+    </div>
+    {% endfor %}
+
+  </div>
+
+{% if posts.paginator.num_pages != 1 %}
+<nav aria-label="Page navigation example">
+
+  <ul class="pagination justify-content-center">
+
+    {% if posts.has_previous %}
+    <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+
+    <li class="page-item">
+      <a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a>
+    </li>
+
+    {% endif %}
+
+    <li class="page-item active" aria-current="page">
+      <span class="page-link">
+        {{posts.number}}
+        <span class="sr-only">(current)</span>
+      </span>
+    </li>
+
+    {% if posts.has_next %}
+    <li class="page-item">
+      <a class="page-link" href="?page={{ posts.next_page_number }}">Next</a>
+    </li>
+
+    <li class="page-item"><a class="page-link" href="?page={{posts.paginator.num_pages }}">Last</a></li>
+    {% endif %}
+
+  </ul>
+
+</nav>
+
+{% endif %}
+
+{% endblock %}

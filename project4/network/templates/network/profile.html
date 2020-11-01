@@ -1,0 +1,107 @@
+{% extends "network/layout.html" %}
+
+{% load static %}
+
+{% block body %}
+
+<div id="profile">
+
+    <div style="display: none;" id="id">{{follow.user.id}}</div>
+
+    <h2>{{follow.user.username}} </h2>
+    <br>
+    <div class="flexcontainer">
+        
+        <div class="flex-item">
+            <div id="followers">{{no_followers}} </div>
+            <div> followers </div>
+        </div>
+
+        <div class="flex-item">
+            <div id="following">{{no_following}}</div>
+            <div>following</div>
+        </div>
+    </div>
+    
+    {% if user.is_authenticated %}
+    {% if follow.user != user %}
+    <br>
+    <button class="btn btn-dark" id="un/follow" type="submit" onclick="follow('{{follow.user.id}}', '{{user}}')"></button>
+    {% endif %}
+    {% endif %}
+
+</div>
+
+<script src="{% static 'network/profile.js' %}"></script>
+
+<hr>
+<h3> posts: </h3>
+
+<div>{{posts.paginator.num_pages }} Pages</div>
+<div>{{no_posts}} Post</div>
+<hr>
+{% for post in posts %}
+<div class=" posts">
+  <div> <a href="{% url 'profile' post.user.id %}">{{post.user.username}} </a> </div>
+
+  {% if user == post.user %}
+  <form id="for{{post.id}}" style="display: none;">
+    {% csrf_token %}
+    <textarea class="form-control" id="con{{post.id}}">{{post.content}}</textarea>
+    <input class="button" type="submit" value="save edit">
+  </form>
+  {% endif %}
+
+  <div class="content" id={{post.id}}>{{post.content}}</div>
+
+  <div class="text-muted"> {{post.timestamp}} </div>
+  <div id="like{{post.id}}">{{post.no_likes}} like</div>
+
+  {% if user.is_authenticated %}
+  <button id="un/like{{post.id}}" type="button" class="btn btn-link" onclick="like('{{post.id}}', '{{user}}')"><i
+      class="far fa-heart"></i></button>
+  {% endif %}
+
+  {% if user == post.user %}
+  <button type="button" class="btn btn-link" onClick="edit('{{post.id}}')"> Edit </button>
+  {% endif %}
+  <hr>
+</div>
+{% endfor %}
+
+
+{% if posts.paginator.num_pages != 1 %}
+<nav aria-label="Page navigation example">
+
+    <ul class="pagination justify-content-center">
+
+        {% if posts.has_previous %}
+        <li class="page-item"><a class="page-link" href="?page=1">First</a></li>
+
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.previous_page_number }}">Previous</a>
+        </li>
+
+        {% endif %}
+
+        <li class="page-item active" aria-current="page">
+            <span class="page-link">
+                {{posts.number}}
+                <span class="sr-only">(current)</span>
+            </span>
+        </li>
+
+        {% if posts.has_next %}
+        <li class="page-item">
+            <a class="page-link" href="?page={{ posts.next_page_number }}">Next</a>
+        </li>
+
+        <li class="page-item"><a class="page-link" href="?page={{posts.paginator.num_pages }}">Last</a></li>
+        {% endif %}
+
+    </ul>
+
+</nav>
+{% endif %}
+
+{% endblock %}

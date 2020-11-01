@@ -1,0 +1,59 @@
+{% extends "auctions/layout.html" %}
+
+
+
+
+{% block body %}
+<h2>Closed Listings</h2>
+
+<div class="row row-cols-1 row-cols-md-4">
+    {% for listing in listings %}
+    <div class="col mb-4">
+
+        <div class="card">
+
+            <div class="card-img-top">
+                <a href="{% url 'listing' listing.id %}">
+                    <img class="index_img" src="{{listing.image}}">
+                </a>
+            </div>
+
+            <div class="card-body">
+
+                <a href="{% url 'listing' listing.id %}" class="btn btn-link">
+                    <div class="info"> {{listing.name}} </div>
+                </a>
+                <div class="info"> price: {{listing.bid.price}} </div>
+                <div> descreption: {{listing.descreption}} </div>
+
+                <div class="badge badge-info"> category: {{listing.category}} </div>
+                
+                <br><br>
+                
+                {% if user.is_authenticated %}
+
+                {% if listing.watchlists.is_watching and listing.watchlists.user == user.username %}
+
+                <div>
+                    <a href="{% url 'remove from watchlist' listing.id %}" class="btn btn-primary">remove from
+                        watchlist</a>
+                </div>
+
+                {% else %}
+
+                <div><a href="{% url 'add to watchlist' listing.id %}" class="btn btn-primary">add to watchlist</a>
+                </div>
+                {% endif %}
+
+                {% endif %}
+
+            </div>
+
+        </div>
+    </div>
+
+    {% endfor %}
+</div>
+
+
+{% endblock %}
